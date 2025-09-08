@@ -1,0 +1,34 @@
+Os parâmetros de cv2.findContours
+
+    contours, hierarchy = cv2.findContours(image, mode, method)
+
+        image: A imagem binária onde os contornos serão detectados.
+        mode: Define o modo de recuperação dos contornos.
+        method: Define o método de aproximação dos contornos.
+
+
+
+    Parâmetro mode
+    O parâmetro mode especifica como os contornos serão recuperados. 
+    Ele define a hierarquia dos contornos e pode assumir os seguintes valores:
+        cv2.RETR_EXTERNAL
+
+        Recupera apenas os contornos mais externos.
+        Não considera a hierarquia dos contornos internos.
+        Útil quando você só precisa dos contornos externos de um objeto.
+        cv2.RETR_LIST
+
+        Recupera todos os contornos sem nenhuma relação hierárquica.
+        Todos os contornos são armazenados no mesmo nível.
+        Útil para obter uma lista de todos os contornos sem se preocupar com a hierarquia.
+        cv2.RETR_CCOMP
+
+        Recupera todos os contornos e os organiza em uma hierarquia de dois níveis.
+        No nível superior, estão os contornos externos dos componentes.
+        No segundo nível, estão os contornos dos buracos dentro desses componentes.
+        Útil para análise de contornos com buracos.
+        cv2.RETR_TREE
+
+        Recupera todos os contornos e reconstrói uma hierarquia completa de contornos aninhados.
+        Mantém a relação pai-filho entre os contornos.
+        Útil para análise detalhada de contornos aninhados.
