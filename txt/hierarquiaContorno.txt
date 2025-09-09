@@ -10,25 +10,46 @@ Os parâmetros de cv2.findContours
 
     Parâmetro mode
     O parâmetro mode especifica como os contornos serão recuperados. 
+    
     Ele define a hierarquia dos contornos e pode assumir os seguintes valores:
         cv2.RETR_EXTERNAL
-
         Recupera apenas os contornos mais externos.
         Não considera a hierarquia dos contornos internos.
         Útil quando você só precisa dos contornos externos de um objeto.
-        cv2.RETR_LIST
 
+
+        cv2.RETR_LIST
         Recupera todos os contornos sem nenhuma relação hierárquica.
         Todos os contornos são armazenados no mesmo nível.
         Útil para obter uma lista de todos os contornos sem se preocupar com a hierarquia.
+        
         cv2.RETR_CCOMP
-
         Recupera todos os contornos e os organiza em uma hierarquia de dois níveis.
         No nível superior, estão os contornos externos dos componentes.
         No segundo nível, estão os contornos dos buracos dentro desses componentes.
         Útil para análise de contornos com buracos.
+        
         cv2.RETR_TREE
-
         Recupera todos os contornos e reconstrói uma hierarquia completa de contornos aninhados.
         Mantém a relação pai-filho entre os contornos.
         Útil para análise detalhada de contornos aninhados.
+
+
+
+        ***hierarchy*** 
+        "O que é hierarquia?"
+            Normalmente, usamos a função cv.findContours() para detectar objetos em uma imagem, certo? Às vezes, os objetos estão em locais diferentes. 
+            Mas, em alguns casos, algumas formas estão dentro de outras formas. Assim como figuras aninhadas. Neste caso, chamamos a externa de pai e a 
+            interna de filho . Dessa forma, os contornos em uma imagem têm alguma relação entre si. 
+            E podemos especificar como um contorno está conectado ao outro, por exemplo, se é filho de outro contorno, se é pai, etc. 
+            A representação dessa relação é chamada de Hierarquia .
+
+        
+        [Próximo, Anterior, Primeiro_Filho, Pai]
+
+        "Próximo denota o próximo contorno no mesmo nível hierárquico."
+        "Anterior denota contorno anterior no mesmo nível hierárquico."
+        "First_Child denota seu primeiro contorno filho."
+        "O pai denota o índice do seu contorno pai."
+
+             Observação: Se não houver filho ou pai, esse campo será considerado -1
