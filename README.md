@@ -1,2 +1,2 @@
-# Visao-Computacional-DRONE
-Script de visão computacional contemplando abordagens possíveis de processamento de imagem para localizar, alinhar e pousar  sobre a figura-alvo.
+# Detecção de Bordas Primitiva
+Uma breve detecção de um quadrado através das bordas e de lados. Futuramente implementar algum tipo de retorno de distância talvez.
