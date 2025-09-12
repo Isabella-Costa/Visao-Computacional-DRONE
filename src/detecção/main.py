@@ -6,7 +6,7 @@ from detectaForma import detectar_quadrado
 
 # Parâmetros para cálculo da distância
 DISTANCIA_FOCAL_PIXELS = 750
-LARGURA_REAL_CM = 5.65  # 5,64 APROX   #Não' pode ser definido assim , alterar teste
+LARGURA_REAL_CM = 5.65  # tamanho real do objeto
 
 
 def calcular_distancia(largura_em_pixels):
@@ -47,38 +47,27 @@ while True:
     # Chama a função de detecção
     info_quadrado = detectar_quadrado(frame)
 
-    # Se a função retornou informações de um quadrado
-    if info_quadrado:
+    if info_quadrado and info_quadrado['quadrado']:
         contorno_detectado = info_quadrado["contour"]
 
-        # Indentifica se a cor ta presente
-        cor_alvo_encontrada = detectar_cor_especifica(
-            frame, contorno_detectado)
+        # Verifica a cor se realmente for quadrado
+        cor_alvo_encontrada = detectar_cor_especifica(frame, contorno_detectado)
 
-        # Exibe a área do quadrado encontrado
-        print(f"Área: {info_quadrado['area']:2f} pixels")
-
+        print(f"Área: {info_quadrado['area']:.2f} pixels")
         distancia = calcular_distancia(info_quadrado['largura_pixels'])
-        print(f"Distância: {distancia} em centímetros")
+        print(f"Distância: {distancia:.2f} cm")
 
         if cor_alvo_encontrada:
-            cor_borda = (0, 0, 255)  # Vermelho para o alvo correto
+            cor_borda = (0, 0, 255)
             texto = f"ALVO DETECTADO ({distancia:.1f} cm)"
-            print("Alvo com cor específica")
         else:
-            cor_borda = (0, 255, 0)  # Verde para um quadrado qualquer
-            texto = "Quadrado"
+            cor_borda = (0, 255, 0)
+            texto = "Quadrado sem cor alvo"
 
-        # ### CORREÇÃO 3: Usa a variável 'cor_borda' para desenhar o contorno. ###
         cv2.drawContours(frame, [contorno_detectado], -1, cor_borda, 3)
-
         cv2.circle(frame, info_quadrado['center'], 5, (0, 0, 255), -1)
-
-        # ### CORREÇÃO 4: Usa a variável 'texto' para escrever na tela. ###
-        texto_pos = (info_quadrado['center'][0] - 80,
-                     info_quadrado['center'][1] - 20)
-        cv2.putText(frame, texto, texto_pos,
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
+        texto_pos = (info_quadrado['center'][0] - 80, info_quadrado['center'][1] - 20)
+        cv2.putText(frame, texto, texto_pos, cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
 
     # Mostra o resultado na janela
     cv2.imshow("Webcam", frame)

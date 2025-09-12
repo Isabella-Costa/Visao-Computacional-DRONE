@@ -20,9 +20,6 @@ def detectar_cor_especifica(frame, contour):
     # Combina as duas máscaras de cor
     mask_cor = mask1 + mask2
 
-    
-
-
     # Cria uma máscara para a forma do contorno detectado
     mascara_contorno = np.zeros(frame.shape[:2], dtype="uint8")
     cv2.drawContours(mascara_contorno, [contour], -1, 255, -1)
